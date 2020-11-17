@@ -48,6 +48,7 @@ class FollowingController {
             return response.status(200).json("você está seguindo este usuário!")
         } else {
             await Following.query().where("user_following_id", params.id).delete()
+            await Follower.query().where("user_follower_id", auth.user.id).delete()
             return response.status(200).json("você deixou de seguir este usuário!")
         }
 
